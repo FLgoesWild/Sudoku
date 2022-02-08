@@ -13,6 +13,8 @@ Aller au-delà peut nécessiter d’émettre des hypothèses sur la valeur à pl
 hypothèse qui peut ensuite aboutir à une solution complète ou au contraire à une contradiction 
 amenant à réfuter l’hypothèse initiale et le remplissage de toutes les cases qui en découlait. 
 Pour les grilles les plus complexes, il faut enchaîner plusieurs hypothèses avant d’aboutir à une solution ou à un blocage.
+
+(pour une description plus détaillée, voir le pdf joint)
 **/
 
 using namespace std;
