@@ -3,6 +3,8 @@
 #include <string>
 #include <fstream> // pour les lecture-ecriture dans les fichiers
 
+//attention : commencer par "o" puis "o" pour creer un nouveau fichier
+
 using namespace std;
 
 typedef struct
@@ -25,7 +27,7 @@ void afficheTab(vector<int> &t)
     }
 }
 
-// insérer ici les fonctions que vous appelez avant que leurs definitions
+// insÃ©rer ici les fonctions que vous appelez avant que leurs definitions
 // apparaissent dans le fichier
 
 void imprime(const Grille &g); // definie en fin de fichier.
@@ -38,8 +40,8 @@ bool userSuggest(Grille &g);
 bool joue(Grille &g);
 
 /** Renvoie true ssi la grille a la bonne forme et ne contient que des valeurs
- * de 0 à 9
- * sert à valider le format d'une grille
+ * de 0 Ã  9
+ * sert Ã  valider le format d'une grille
  **/
 bool bienFormee(const Grille &g)
 {
@@ -47,19 +49,19 @@ bool bienFormee(const Grille &g)
     int nbLigne = 0;
     for (size_t i = 0; i < g.grille.size(); i++)
     {
-        if (g.grille.at(i).size() != 9) // vérifie le nombre de colonnes dans une ligne
+        if (g.grille.at(i).size() != 9) // vÃ©rifie le nombre de colonnes dans une ligne
         {
             res = false;
         }
         nbLigne++; //compte le nombre de lignes
     }
-    if (nbLigne != 9) // vérifie le nombre de lignes
+    if (nbLigne != 9) // vÃ©rifie le nombre de lignes
     {
         res = false;
         cout << "grille mal formee" << endl;
     }
 
-    //vérification des valeurs
+    //vÃ©rification des valeurs
     for(size_t lig = 0; lig < 9; lig ++)
     {
         for(size_t col = 0; col < 9; col ++)
@@ -75,7 +77,7 @@ bool bienFormee(const Grille &g)
 }
 
 
-/** Verifie si la grille est valide: chaque valeur de 1 à 9 apparait au plus une fois dans chaque ligne, colonne et région
+/** Verifie si la grille est valide: chaque valeur de 1 Ã  9 apparait au plus une fois dans chaque ligne, colonne et rÃ©gion
  * sert aussi a tester si un placement de valeur est correct : on place la valeur, on appelle la fonction sur la nouvelle grille
  * si false -> annuler le placement et essayer autre chose
  **/
@@ -85,7 +87,7 @@ bool valide(const Grille &g)
     int val;
     if (bienFormee(g)==true)
     {
-        // vérifier si le nb apparaît au plus une fois dans la ligne: on compare les valeurs entre elles
+        // vÃ©rifier si le nb apparaÃ®t au plus une fois dans la ligne: on compare les valeurs entre elles
         for (int lig = 0; lig < 9; lig++)
         {
             for (int col = 0; col < 9; col++)
@@ -97,7 +99,7 @@ bool valide(const Grille &g)
                 else
                 {
                     val = g.grille.at(lig).at(col);
-                    for (int c = col+1; c < 9; c++) //on saute la colonne courante pour ne pas la comparer avec elle-même
+                    for (int c = col+1; c < 9; c++) //on saute la colonne courante pour ne pas la comparer avec elle-mÃªme
                     {
                         if(g.grille.at(lig).at(c) == val)
                         {
@@ -133,7 +135,7 @@ bool valide(const Grille &g)
             }
         }
 
-        //pour les régions
+        //pour les rÃ©gions
         int ind_x, ind_y;
         for (int lig = 0; lig < 9; lig++)
         {
@@ -148,11 +150,11 @@ bool valide(const Grille &g)
                     val = g.grille.at(lig).at(col);
                     ind_x = (lig/3)*3;
                     ind_y = (col/3)*3;
-                    for (int x = ind_x; x < ind_x+3; x++)// on parcourt la région
+                    for (int x = ind_x; x < ind_x+3; x++)// on parcourt la rÃ©gion
                     {
                         for(int y = ind_y; y < ind_y+3; y++)
                             {
-                                // quand on est à la case courante, on la saute pour ne pas la comparer avec elle-même
+                                // quand on est Ã  la case courante, on la saute pour ne pas la comparer avec elle-mÃªme
                                 if (x!=lig and y!=col and g.grille.at(x).at(y) == val)
                                 {
                                     res = false;
@@ -241,7 +243,7 @@ Indices indiceRegionHG (const Grille &g, Indices ind)
 
 
 /** renvoie le vecteur des valeurs disponibles pour le couple d'indices ind,
- * compte-tenu des valeurs placées sur sa ligne, colonne et sa région
+ * compte-tenu des valeurs placÃ©es sur sa ligne, colonne et sa rÃ©gion
 */
 vector<int> possibles(const Grille &g, Indices ind)
 {
@@ -249,7 +251,7 @@ vector<int> possibles(const Grille &g, Indices ind)
     res.clear();
     vector<bool> p (9,true);
     int n;
-    //cherche les valeurs déjà existantes
+    //cherche les valeurs dÃ©jÃ  existantes
    for (size_t lig = 0; lig < 9; lig++)
     {
         n = g.grille.at(lig).at(ind.col);
@@ -295,10 +297,10 @@ vector<int> possibles(const Grille &g, Indices ind)
 
 /** recoit en argument le vecteur des valeurs possibles pour la case
  * d'indices ij. Parcourt les valeurs en cherchant si pour l'une d'entre
- * elles il existe un seul emplacement valide dans la région.
+ * elles il existe un seul emplacement valide dans la rÃ©gion.
  * Dans ce cas, stocke la valeur dans la case et renvoie true.
  * Renvoie false si pour chaque valeur possible il existe au moins deux
- * cases où on pourrait potentiellement la ranger. Dans ce cas ne
+ * cases oÃ¹ on pourrait potentiellement la ranger. Dans ce cas ne
  * modifie pas la grille.
  **/
 bool force(Grille &g, Indices ij, vector<int> vpossibles)
@@ -322,7 +324,7 @@ bool force(Grille &g, Indices ij, vector<int> vpossibles)
         for (int i =0; i < vpossibles.size(); i++)
         {
             //cout << "valeur testee en cours: " << vpossibles.at(i) << endl;
-            for (size_t ii = x; ii < x+3; ii++)//on parcourt la région
+            for (size_t ii = x; ii < x+3; ii++)//on parcourt la rÃ©gion
             {
                 for(size_t jj = y; jj < y+3; jj++)
                 {
@@ -341,7 +343,7 @@ bool force(Grille &g, Indices ij, vector<int> vpossibles)
                             for (size_t n = 0; n < v.size(); n++)// on parcourt le vecteur possible de chaque case vide
                             {
                                 //cout << "valeur testee: " << v.at(n) << endl;
-                                if(v.at(n) == vpossibles.at(i))// on compare chaque élément de vpossibles avec les éléments de la case ij qui sont dans vide
+                                if(v.at(n) == vpossibles.at(i))// on compare chaque Ã©lÃ©ment de vpossibles avec les Ã©lÃ©ments de la case ij qui sont dans vide
                                 {
                                     cptr = cptr + 1;// si un nombre est dans les deux vecteurs, il existe dans deux cases, donc on renvoie false
                                     res = false;
@@ -362,7 +364,7 @@ bool force(Grille &g, Indices ij, vector<int> vpossibles)
                 //cout << "valeur :" << vpossibles.at(i) << " forcee" << endl;
                 return res;
             }
-            cptr = 0;//on reinitialise le compteur à 0 pour les autres valeurs de vpossibles
+            cptr = 0;//on reinitialise le compteur Ã  0 pour les autres valeurs de vpossibles
         }
     }
     return res;
@@ -371,8 +373,8 @@ bool force(Grille &g, Indices ij, vector<int> vpossibles)
 
 
 
-/** demande à l'uitlisateur de fournir une valeur pour un indice (une case)
-*fonction vérifie si la case est vide et que la valeur fournie est possible => modifie g et revoit true
+/** demande Ã  l'uitlisateur de fournir une valeur pour un indice (une case)
+*fonction vÃ©rifie si la case est vide et que la valeur fournie est possible => modifie g et revoit true
 *@param grille g
 *@return vrai ou faux si la valeur de l'utilisateur n'est pas bonne
 **/
@@ -410,7 +412,7 @@ bool userSuggest(Grille &g)
             return false;
         }
 
-        // vérifier que la case est vide
+        // vÃ©rifier que la case est vide
         Indices cases;
         cases.lig = lig - 1;
         cases.col = col - 1;
@@ -425,11 +427,11 @@ bool userSuggest(Grille &g)
         {
             do
             {
-                cout << "rentrer la valeur: (0 pour avoir les hypothèses)";
+                cout << "rentrer la valeur: (0 pour avoir les hypothÃ¨ses)";
                 cin >> val;
                 if( val == 0)
                 {
-                    cout << "voici les hypothèses: " << endl;
+                    cout << "voici les hypothÃ¨ses: " << endl;
                     afficheTab(v);
                     cout << "rentrer votre choix: ";
                     cin >> val;
@@ -440,14 +442,14 @@ bool userSuggest(Grille &g)
                 {
                     if(is_sauvegarde == true)
                     {
-                        sauvegarde += to_string(cases.lig)+" "+to_string(cases.col)+" "+to_string(val)+"\n";//on mémorise le choix de la cases courante
+                        sauvegarde += to_string(cases.lig)+" "+to_string(cases.col)+" "+to_string(val)+"\n";//on mÃ©morise le choix de la cases courante
                     }
 
                     imprime(g);
                     return true;
 
                 }
-                else//si jamais l'utilisateur n'a pas demandé d'indice et qu'il met une valeur fausse
+                else//si jamais l'utilisateur n'a pas demandÃ© d'indice et qu'il met une valeur fausse
                 {
                     g.grille.at(cases.lig).at(cases.col) = 0;
                     cout << "valeur incorrecte, voulez-vous rentrer une autre valeur? (o ou n): ";
@@ -455,8 +457,8 @@ bool userSuggest(Grille &g)
 
                     if (d == 'o')
                     {
-                        imprime(g);//pour remontrer à l'utilisateur la grille
-                        cout << "voici les hypothèses: " << endl;
+                        imprime(g);//pour remontrer Ã  l'utilisateur la grille
+                        cout << "voici les hypothÃ¨ses: " << endl;
                         afficheTab(v);
                         cptr = cptr + 1;
                     }
@@ -521,7 +523,7 @@ bool joue(Grille &g)
         cout << "chargement des valeurs sauvegardees" << endl;
         ifstream fichier(g.nom+"_sauvegarde.txt");
         string ligne;
-        while(getline(fichier, ligne)) //tant qu'on n'est pas à la fin du fichier, on lit
+        while(getline(fichier, ligne)) //tant qu'on n'est pas Ã  la fin du fichier, on lit
        {
            //cout << ligne << endl;
            i = ligne[0]- '0';// pour convertir en entier
@@ -533,16 +535,16 @@ bool joue(Grille &g)
        }
         fichier.close();
     }
-    while (cptrGrille1 -  cptrGrille2 != 0)//tant que la grille n'est pas complète
+    while (cptrGrille1 -  cptrGrille2 != 0)//tant que la grille n'est pas complÃ¨te
     {
         cptrBoucle += 1;//pour savoir combien de boucle le programme fait avant de terminer la grille
         int cptrTemp1 = 0;
-        cptrGrille1 = 81;// il faut réinitialiser le cptr
+        cptrGrille1 = 81;// il faut rÃ©initialiser le cptr
         for (size_t l = 0; l < 9; l++)
         {
             for (size_t c = 0; c < 9; c++)
             {
-                if(g.grille.at(l).at(c) !=0)//compte les cases occupées
+                if(g.grille.at(l).at(c) !=0)//compte les cases occupÃ©es
                 {
                     cptrGrille1 = cptrGrille1 - 1;//nombre de cases libres
                 }
@@ -586,7 +588,7 @@ bool joue(Grille &g)
             }// fin for col
         }// fin for lig
 
-        int cptrTemp2 = 0;//on recompte le nombre de place vide après force
+        int cptrTemp2 = 0;//on recompte le nombre de place vide aprÃ¨s force
         for (size_t l = 0; l < 9; l++)
         {
             for (size_t c = 0; c < 9; c++)
@@ -601,11 +603,11 @@ bool joue(Grille &g)
         cout << endl;*/
         if(cptrTemp1 == cptrTemp2)
         {
-            cptrGrille2 = cptrGrille1;//on sort du while, toutes les cases ont été remplies
+            cptrGrille2 = cptrGrille1;//on sort du while, toutes les cases ont Ã©tÃ© remplies
         }
         else
         {
-            cptrGrille2 = cptrGrille1 - cptrTemp2;//le nombre de cases qu'il reste à remplir
+            cptrGrille2 = cptrGrille1 - cptrTemp2;//le nombre de cases qu'il reste Ã  remplir
         }
         /*cout << "cptrGrille2 = " << cptrGrille2 << endl;
         cout << endl;*/
@@ -621,7 +623,7 @@ bool joue(Grille &g)
     imprime(g);
 
     cout << "il reste " << cptrFin << " cases a completer" << endl;
-    if (cptrFin != 0)//il y a encore des cases vides à compléter
+    if (cptrFin != 0)//il y a encore des cases vides Ã  complÃ©ter
     {
         userSuggest(g);
         //cout << "sortie userSuggest" << endl;
@@ -680,7 +682,7 @@ bool joue(Grille &g)
 
 
 
-/* quelques grilles prédéfinies */
+/* quelques grilles prÃ©dÃ©finies */
 int main() {
 
     //test bienFormee (exemple1/7)
@@ -697,7 +699,7 @@ int main() {
 		}};
 		bienFormee(g1);*/
 
-  // Les grilles G2 à G3 peuvent se résoudre sans aide de l'utilisateur
+  // Les grilles G2 Ã  G3 peuvent se rÃ©soudre sans aide de l'utilisateur
   Grille g2 = { "G2",
 		{ { 5, 3, 0, 0, 7, 0, 0, 0, 0 },
 		  { 6, 0, 0, 1, 9, 5, 0, 0, 0 },
@@ -717,7 +719,7 @@ int main() {
 		vector<int> v;
 		v = possibles(g2, ind);
 		afficheTab(v);
-		force(g2,ind,v);//la fonction force ne complète pas la grille de manière chronologique mais de manière synthétique (comme un vrai joueur)
+		force(g2,ind,v);//la fonction force ne complÃ¨te pas la grille de maniÃ¨re chronologique mais de maniÃ¨re synthÃ©tique (comme un vrai joueur)
 		imprime(g2);*/
 
   Grille g3 = { "G3",
@@ -750,8 +752,8 @@ int main() {
 		//test de joue (exemple4/7)
 		//joue(g4);
 
-  // cette grille admet deux solutions différentes mais demande une aide
-  // de l'utilisateur si on se limite aux deux autres stratégies définies
+  // cette grille admet deux solutions diffÃ©rentes mais demande une aide
+  // de l'utilisateur si on se limite aux deux autres stratÃ©gies dÃ©finies
   Grille g5 = { "G5",
 		{ { 0, 0, 8, 0, 0, 0, 2, 0, 0 },
 		  { 0, 0, 4, 3, 0, 0, 0, 0, 1 },
@@ -778,7 +780,7 @@ int main() {
         is_replay = true;
 
 
-        if (monFichier)//vérifie si le fichier existe
+        if (monFichier)//vÃ©rifie si le fichier existe
         {
             cout << "fichier de sauvegarde trouve" << endl;
             monFichier.close();//pour etre sur qu'il soit ferme avant reouverture plus tard
@@ -803,19 +805,19 @@ int main() {
   return 0;
 }
 
-		// Fonctions fournies, rien à modifier a priori.
+		// Fonctions fournies, rien Ã  modifier a priori.
 
 
-/** Imprime une ligne de séparation formée du caractère passé en argument */
+/** Imprime une ligne de sÃ©paration formÃ©e du caractÃ¨re passÃ© en argument */
 void imprimeL(char c) {
   cout << ' ';
   for(size_t i = 0; i < 9; i += 1) { cout << c << c << c << c; }
-  /* pour prendre en compte les espaces ajoutés prèsb des '+' */
+  /* pour prendre en compte les espaces ajoutÃ©s prÃ¨sb des '+' */
   cout << c << c << c << c << c << c;
   cout << endl;
 }
 
-/** suppose la grille bien formee: 9 lignes de 9 colonnes de chiffres de 0 à 9 */
+/** suppose la grille bien formee: 9 lignes de 9 colonnes de chiffres de 0 Ã  9 */
 void imprime(const Grille &g) {
   for(size_t i = 0; i < 9; i += 1) {
     imprimeL(i % 3 == 0 ? '+' : '-'); // ligne d'en-tete
