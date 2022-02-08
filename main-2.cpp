@@ -3,7 +3,17 @@
 #include <string>
 #include <fstream> // pour les lecture-ecriture dans les fichiers
 
-//attention : commencer par "o" puis "o" pour creer un nouveau fichier
+/**attention : commencer par "o" puis "o" pour creer un nouveau fichier
+description du code : c'est une résolution partielle de sudoku (semi-automatisée)
+Le but est d’automatiser partiellement la recherche d’une solution à une grille de sudoku 
+en programmant quelques stratégies simples de remplissage basées sur des choix forcés pour certaines cases. 
+En combinant ces stratégies et en itérant le procédé on peut plus ou moins compléter des grilles, 
+selon leur niveau de difficulté. 
+Aller au-delà peut nécessiter d’émettre des hypothèses sur la valeur à placer dans une case, 
+hypothèse qui peut ensuite aboutir à une solution complète ou au contraire à une contradiction 
+amenant à réfuter l’hypothèse initiale et le remplissage de toutes les cases qui en découlait. 
+Pour les grilles les plus complexes, il faut enchaîner plusieurs hypothèses avant d’aboutir à une solution ou à un blocage.
+**/
 
 using namespace std;
 
